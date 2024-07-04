@@ -1,118 +1,460 @@
+"use client";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import Image from "next/image";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function Home() {
+  const [schoolView, setSchoolView] = useState("flex");
+  const [enterpriseView, setEnterpriseView] = useState("none");
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <Box className="w-screen h-screen ">
+      <Navbar />
+      <Box mt={{ base: 10, lg: 20 }}>
+        <Center>
+          <Heading px={{ base: 5, lg: 0 }} textAlign={"center"}>
+            Decouvrez une nouvelle manière de voir le monde
+          </Heading>
+        </Center>
+        <Center>
+          <Text
+            mt={5}
+            fontSize={{ base: "15px", lg: "20px" }}
+            px={{ base: 5, lg: 0 }}
+            textAlign={"center"}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+            {" "}
+            Rejoignez nous et profiter de services vous permettant de gagner en
+            temps, en expertise et en fiabilité
+          </Text>
+        </Center>
+        <Center mt={10} display={"flex"}>
+          <Button
+            mr={20}
+            borderRadius={25}
+            p={5}
+            color={"white"}
+            border={"1px solid #bf4408"}
+            bgColor={"#bf4408"}
+            _hover={{ textDecor: "none", bgColor: "#bf4408" }}
+          >
+            Nous rejoindre
+          </Button>
+          <Button
+            border={"1px solid #bf4408"}
+            borderRadius={25}
+            p={5}
+            bgColor={"transparent"}
+            _hover={{ textDecor: "none", bgColor: "#bf4408", color: "white" }}
+          >
+            Apprendre plus
+          </Button>
+        </Center>
+      </Box>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <Box mt={20}>
+        <Center>
+          <Heading>Nos Services</Heading>
+        </Center>
+        <Center>
+          <Box>
+            <SimpleGrid
+              columns={2}
+              spacing={10}
+              px={{ base: 10, lg: 10 }}
+              mt={{ base: 10, lg: 10 }}
+            >
+              <Box>
+                <Image
+                  src="/DECENTRALISER.png"
+                  alt="Service 1"
+                  width={200}
+                  height={200}
+                />
+                <Heading mt={5}>Decentralisation</Heading>
+                <Text>Description du service 1</Text>
+              </Box>
+              <Box>
+                <Image
+                  src="/mutualiser_grand_est.png"
+                  alt="Service 2"
+                  width={200}
+                  height={200}
+                />
+                <Heading mt={5}>Mutualisation</Heading>
+                <Text>Description du service 2</Text>
+              </Box>
+              <Box>
+                <Image
+                  src="/VERIFIER.png"
+                  alt="Service 3"
+                  width={200}
+                  height={200}
+                />
+                <Heading mt={5}>Verification</Heading>
+                <Text>Description du service 3</Text>
+              </Box>
+              <Box>
+                <Image
+                  src="/COFFRE.jpg"
+                  alt="Service 4"
+                  width={200}
+                  height={200}
+                />
+                <Heading mt={5}>Coffre de document</Heading>
+                <Text>Description du service 3</Text>
+              </Box>
+            </SimpleGrid>
+          </Box>
+        </Center>
+      </Box>
+      <Box my={20}>
+        <Center>
+          <Heading id="tarifs">Nos abonnements</Heading>
+        </Center>
+        <Center my={10} display={"flex"}>
+          <Button
+            mr={20}
+            borderRadius={25}
+            p={5}
+            py={7}
+            color={"white"}
+            border={"1px solid #bf4408"}
+            bgColor={"#bf4408"}
+            _hover={{ textDecor: "none", bgColor: "#bf4408" }}
+            onClick={() => {
+              setEnterpriseView("none"), setSchoolView("flex");
+            }}
+          >
+            Etablissement
+          </Button>
+          <Button
+            border={"1px solid #bf4408"}
+            borderRadius={25}
+            p={5}
+            py={7}
+            bgColor={"transparent"}
+            _hover={{ textDecor: "none", bgColor: "#bf4408", color: "white" }}
+            onClick={() => {
+              setEnterpriseView("flex"), setSchoolView("none");
+            }}
+          >
+            Entreprise
+          </Button>
+        </Center>
+        <Center>
+          <Box display={schoolView}>
+            <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={10}>
+              {/* gratuit */}
+              <Box
+                height={"50vh"}
+                px={10}
+                borderRadius={20}
+                boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
+              >
+                <Heading my={5}>Basique</Heading>
+                <Text>Abonnement etant soumis à des restrictions</Text>
+                <Heading>0 XOF</Heading>
+                <Box
+                  width={"full"}
+                  height={"1px"}
+                  border={"1px solid grey"}
+                  bgColor={"grey"}
+                />
+                <Text my={5} fontSize={"20px"} fontWeight={500}>
+                  {" "}
+                  Avantages
+                </Text>
+                <Flex>
+                  <FaCheckCircle color="green" />
+                  <Text ml={2}>Enregistrement d{"'"}apprenants</Text>
+                </Flex>
+              </Box>
+              {/* primaire */}
+              <Box
+                height={"50vh"}
+                px={10}
+                borderRadius={20}
+                boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
+              >
+                <Heading my={5}>Primaire</Heading>
+                <Text>Abonnement réservé aux établissements primaires</Text>
+                <Heading>2000 XOF</Heading>
+                <Box
+                  width={"full"}
+                  height={"1px"}
+                  border={"1px solid grey"}
+                  bgColor={"grey"}
+                />
+                <Text my={5} fontSize={"20px"} fontWeight={500}>
+                  {" "}
+                  Avantages
+                </Text>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement d{"'"}apprenants</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de bulletins</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de remarque</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité d{"'"}attribuer des accés aux parents
+                  </Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité de consulter les enregistrements
+                  </Text>
+                </Flex>
+              </Box>
+              {/* college/lycee */}
+              <Box
+                height={"50vh"}
+                px={10}
+                borderRadius={20}
+                boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
+              >
+                <Heading my={5}>College/Lycee</Heading>
+                <Text>
+                  Abonnement réservé aux établissements du college/lycee
+                </Text>
+                <Heading>3000 XOF</Heading>
+                <Box
+                  width={"full"}
+                  height={"1px"}
+                  border={"1px solid grey"}
+                  bgColor={"grey"}
+                />
+                <Text my={5} fontSize={"20px"} fontWeight={500}>
+                  {" "}
+                  Avantages
+                </Text>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement d{"'"}apprenants</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de bulletins</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de diplôme</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de remarque</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité d{"'"}attribuer des accés aux parents
+                  </Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité de consulter les enregistrements
+                  </Text>
+                </Flex>
+              </Box>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+              {/* University */}
+              <Box
+                height={"50vh"}
+                px={10}
+                borderRadius={20}
+                boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
+              >
+                <Heading my={5}>Université</Heading>
+                <Text>Abonnement réservé aux Universités</Text>
+                <Heading>5000 XOF</Heading>
+                <Box
+                  width={"full"}
+                  height={"1px"}
+                  border={"1px solid grey"}
+                  bgColor={"grey"}
+                />
+                <Text my={5} fontSize={"20px"} fontWeight={500}>
+                  {" "}
+                  Avantages
+                </Text>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement d{"'"}apprenants</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de bulletins</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de remarque</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité d{"'"}attribuer des accés aux parents
+                  </Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité de consulter les enregistrements
+                  </Text>
+                </Flex>
+              </Box>
+            </SimpleGrid>
+          </Box>
+        </Center>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+        <Center>
+          <Box display={enterpriseView}>
+            <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={10}>
+              {/* Basique */}
+              <Box
+                height={"50vh"}
+                px={10}
+                borderRadius={20}
+                boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
+              >
+                <Heading my={5}>Basique</Heading>
+                <Text>
+                  Abonnement réservé aux entreprises desirant avoir un avant
+                  gout de nos services
+                </Text>
+                <Heading>3000 XOF / Mois</Heading>
+                <Box
+                  width={"full"}
+                  height={"1px"}
+                  border={"1px solid grey"}
+                  bgColor={"grey"}
+                />
+                <Text my={5} fontSize={"20px"} fontWeight={500}>
+                  {" "}
+                  Avantages
+                </Text>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement d{"'"}apprenants</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de bulletins</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de remarque</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité d{"'"}attribuer des accés aux parents
+                  </Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité de consulter les enregistrements
+                  </Text>
+                </Flex>
+              </Box>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
+              {/* Moyen */}
+              <Box
+                height={"50vh"}
+                px={10}
+                borderRadius={20}
+                boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
+              >
+                <Heading my={5}>Moyen</Heading>
+                <Text>Abonnement etant soumis à des restrictions</Text>
+                <Heading>5000 XOF / 3 MOIS</Heading>
+                <Box
+                  width={"full"}
+                  height={"1px"}
+                  border={"1px solid grey"}
+                  bgColor={"grey"}
+                />
+                <Text my={5} fontSize={"20px"} fontWeight={500}>
+                  {" "}
+                  Avantages
+                </Text>
+                <Flex>
+                  <FaCheckCircle color="green" />
+                  <Text ml={2}>Enregistrement d{"'"}apprenants</Text>
+                </Flex>
+              </Box>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+              {/* University */}
+              <Box
+                height={"50vh"}
+                px={10}
+                borderRadius={20}
+                boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
+              >
+                <Heading my={5}>Intermediaire</Heading>
+                <Text>Abonnement réservé aux entreprises desirant </Text>
+                <Heading>15000 XOF / 1 AN</Heading>
+                <Box
+                  width={"full"}
+                  height={"1px"}
+                  border={"1px solid grey"}
+                  bgColor={"grey"}
+                />
+                <Text my={5} fontSize={"20px"} fontWeight={500}>
+                  {" "}
+                  Avantages
+                </Text>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement d{"'"}apprenants</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de bulletins</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>Enregistrement de remarque</Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité d{"'"}attribuer des accés aux parents
+                  </Text>
+                </Flex>
+                <Flex mt={5}>
+                  <FaCheckCircle size={20} color="green" />
+                  <Text ml={2}>
+                    Possibilité de consulter les enregistrements
+                  </Text>
+                </Flex>
+              </Box>
+            </SimpleGrid>
+          </Box>
+        </Center>
+      </Box>
+      <Footer />
+    </Box>
   );
 }
