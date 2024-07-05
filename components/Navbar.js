@@ -18,6 +18,7 @@ import {
 import { CiMenuBurger } from "react-icons/ci";
 
 import React from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();

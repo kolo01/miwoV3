@@ -13,7 +13,7 @@ import {
 import React, { useState } from "react";
 
 function Dashboard() {
-  const [role, setRole] = useState("Enterprise");
+  const [role, setRole] = useState("School");
   return (
     <>
       {role == "Enterprise" ? (

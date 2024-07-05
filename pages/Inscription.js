@@ -151,6 +151,8 @@ function Inscription() {
                         color: "white",
                         textDecor: "none",
                       }}
+                      as={Link}
+                      href="/Dashboard"
                     >
                       Inscription
                     </Button>
@@ -244,6 +246,8 @@ function Inscription() {
                         color: "white",
                         textDecor: "none",
                       }}
+                      as={Link}
+                      href="/Dashboard"
                     >
                       Inscription
                     </Button>

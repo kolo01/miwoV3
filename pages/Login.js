@@ -7,6 +7,7 @@ import {
   Flex,
   Heading,
   Input,
+  Link,
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -49,7 +50,7 @@ function Login() {
 
   // updateStudentView();
   return (
-    <Box bgImage={"./school.jpg"} className="h-screen ">
+    <Box className="h-screen ">
       <Navbar />
       <Box mt={"20vh"}>
         <Center>
@@ -132,6 +133,8 @@ function Login() {
                         color: "white",
                         textDecor: "none",
                       }}
+                      as={Link}
+                      href="/Dashboard"
                     >
                       Connexion
                     </Button>
@@ -178,6 +181,8 @@ function Login() {
                         color: "white",
                         textDecor: "none",
                       }}
+                      as={Link}
+                      href="/Dashboard"
                     >
                       Connexion
                     </Button>
@@ -224,6 +229,8 @@ function Login() {
                         color: "white",
                         textDecor: "none",
                       }}
+                      as={Link}
+                      href="/Dashboard"
                     >
                       Connexion
                     </Button>
