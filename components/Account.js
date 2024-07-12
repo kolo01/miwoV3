@@ -8,7 +8,10 @@ export function Account() {
   const { data: ensAvatar } = useEnsAvatar({ name });
 
   return (
-    <Box boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}>
+    <Box
+      boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
+      width={"50px"}
+    >
       {ensAvatar && <Image alt="ENS Avatar" src={ensAvatar} />}
       {address && <div>{ensName ? `${ensName} (${address})` : address}</div>}
 

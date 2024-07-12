@@ -10,8 +10,9 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
+import axios from "axios";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
 export default function Home() {
@@ -381,7 +382,7 @@ export default function Home() {
 
               {/* Moyen */}
               <Box
-                height={"50vh"}
+                height={{ base: "fit-content", lg: "50vh" }}
                 px={10}
                 borderRadius={20}
                 boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
@@ -407,7 +408,7 @@ export default function Home() {
 
               {/* University */}
               <Box
-                height={"50vh"}
+                height={{ base: "fit-content", lg: "50vh" }}
                 px={10}
                 borderRadius={20}
                 boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}

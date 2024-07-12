@@ -25,6 +25,10 @@ import { useAccount } from "wagmi";
 import SaveStudent from "../saveStudents";
 import SaveDiploma from "../saveDiplomas";
 import GetStudent from "../getStudents";
+import { FaHome } from "react-icons/fa";
+import { PiUsersFourDuotone } from "react-icons/pi";
+import { FaUserGraduate } from "react-icons/fa";
+import { FaSackDollar } from "react-icons/fa6";
 
 function ConnectWallet() {
   const { isConnected } = useAccount();
@@ -55,9 +59,16 @@ function ConnectWallet() {
 
 function SchoolView() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [view, setView] = useState();
+
   return (
     <Flex>
-      <Box className="h-screen " bgColor={"#f2eae0"} p={20}>
+      <Box
+        display={{ base: "none", lg: "block" }}
+        className="h-screen "
+        bgColor={"#f2eae0"}
+        p={20}
+      >
         <Center>
           <Avatar />
         </Center>
@@ -71,10 +82,10 @@ function SchoolView() {
           fontSize={"25px"}
           spacing={10}
         >
-          <Text> Accueil</Text>
-          <Text> Mes Diplomes</Text>
-          <Text> Mon Parcours </Text>
-          <Text> Profils</Text>
+          <Text onClick={() => setView("Accueil")}> Accueil</Text>
+          <Text onClick={() => setView("Apprenants")}> Nos Apprenants</Text>
+          <Text onClick={() => setView("Diplomes")}> Nos diplômes </Text>
+          <Text onClick={() => setView("Profils")}> Profils</Text>
           {/* <Text> View</Text> */}
         </SimpleGrid>
         <Flex mt={"20vh"}>
@@ -98,7 +109,58 @@ function SchoolView() {
           </Modal> */}
         </Flex>
       </Box>
+      <Box
+        display={{ base: "block", lg: "none" }}
+        className="h-screen "
+        bgColor={"#f2eae0"}
+        p={20}
+      >
+        <Center>
+          <Avatar />
+        </Center>
+        <Center>
+          <Heading>Nom du groupe</Heading>
+        </Center>
+        <SimpleGrid
+          columns={1}
+          mt={40}
+          fontWeight={500}
+          fontSize={"25px"}
+          spacing={10}
+        >
+          <Text onClick={() => setView("Accueil")}>
+            {" "}
+            <FaHome size={"50px"} />
+          </Text>
+          <Text onClick={() => setView("Apprenants")}>
+            {" "}
+            <PiUsersFourDuotone size={"50px"} />
+          </Text>
+          <Text onClick={() => setView("Diplomes")}>
+            {" "}
+            <FaUserGraduate size={"50px"} />
+          </Text>
+          <Text onClick={() => setView("Paiement")}>
+            {" "}
+            <FaSackDollar size={"50px"} />
+          </Text>
+          <Text onClick={() => setView("Profils")}>
+            {" "}
+            <Avatar />
+          </Text>
+          {/* <Text> View</Text> */}
+        </SimpleGrid>
+        <Flex mt={"5vh"}>
+          <ConnectWallet />
+        </Flex>
+      </Box>
       <Box className="h-screen " bgColor={"white"}>
+        {/* <Center>
+          <Heading>Rechercher un etudiant</Heading>
+        </Center> */}
+        <Box ml={20} mt={10}>
+          <GetStudent />
+        </Box>
         <SimpleGrid columns={3} spacing={10} mt={20}>
           <Box
             textAlign={"center"}
@@ -165,10 +227,6 @@ function SchoolView() {
           <SaveStudent />
           <SaveDiploma />
         </Flex>
-        <Center>
-          <Heading>Rechercher un etudiant</Heading>
-        </Center>
-        <GetStudent />
       </Box>
     </Flex>
   );

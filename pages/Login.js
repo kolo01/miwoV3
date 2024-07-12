@@ -1,5 +1,6 @@
 "use client";
 import Navbar from "@/components/Navbar";
+import { authentic, fire } from "@/utils/Firebase";
 import {
   Box,
   Button,
@@ -9,11 +10,17 @@ import {
   Input,
   Link,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useState } from "react";
 
 function Login() {
+  const toast = useToast();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [selected, setSelected] = useState("Enterprise");
   const [colorSelected, setColorSelected] = useState([
     "white",
@@ -42,6 +49,54 @@ function Login() {
         TextcolorSelected[index] = "black";
       }
     });
+  };
+
+  const Login = async (e) => {
+    e.preventDefault();
+    console.log("Login");
+    await signInWithEmailAndPassword(
+      authentic,
+      email.toLowerCase(),
+      password.toLowerCase()
+    )
+      .then(async (res) => {
+        toast({
+          title: "Bienvenue",
+          description: "Vous serez redirigé sous peu",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        console.log(res.user.email);
+        const docRef = doc(fire, `Users/${res.user.email}`);
+        const docInfo = await getDoc(docRef);
+        if (docInfo.exists()) {
+          sessionStorage.setItem("role", docInfo.data().role);
+          sessionStorage.setItem("nom", docInfo.data().nom);
+          sessionStorage.setItem("email", docInfo.data().email);
+        }
+      })
+      .catch((err) => {
+        if (err.message == "Firebase: Error (auth/invalid-credential).") {
+          toast({
+            title: "Identifiant introuvable",
+            description: "Vérifiez votre identifiant et votre mot de passe",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "Problème detecté",
+            description: "Veuillez reessayer ou contacter les administrateurs",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+
+        console.log("erreur", err.message);
+      });
   };
 
   // const updateStudentView = () => {
@@ -106,9 +161,14 @@ function Login() {
                 <Center>
                   <Heading>Connexion</Heading>
                 </Center>
-                <form>
+                <form onSubmit={Login}>
                   <Input
                     mt={5}
+                    required
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    value={email}
                     border={"2px solid black"}
                     type="email"
                     placeholder="Email"
@@ -116,6 +176,11 @@ function Login() {
                   />
                   <Input
                     mt={5}
+                    required
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    value={password}
                     border={"2px solid black"}
                     type="password"
                     placeholder="Mot de passe"
@@ -133,8 +198,6 @@ function Login() {
                         color: "white",
                         textDecor: "none",
                       }}
-                      as={Link}
-                      href="/Dashboard"
                     >
                       Connexion
                     </Button>
@@ -154,18 +217,28 @@ function Login() {
                 <Center>
                   <Heading>Connexion</Heading>
                 </Center>
-                <form>
+                <form onSubmit={Login}>
                   <Input
                     mt={5}
                     border={"2px solid black"}
                     type="email"
+                    required
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    value={email}
                     placeholder="Email"
                     _placeholder={{ color: "black", fontWeight: "black" }}
                   />
                   <Input
                     mt={5}
+                    required
                     border={"2px solid black"}
                     type="password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    value={password}
                     placeholder="Mot de passe"
                     _placeholder={{ color: "black", fontWeight: "black" }}
                   />
@@ -181,8 +254,6 @@ function Login() {
                         color: "white",
                         textDecor: "none",
                       }}
-                      as={Link}
-                      href="/Dashboard"
                     >
                       Connexion
                     </Button>
@@ -202,18 +273,28 @@ function Login() {
                 <Center>
                   <Heading>Connexion</Heading>
                 </Center>
-                <form>
+                <form onSubmit={Login}>
                   <Input
                     mt={5}
                     border={"2px solid black"}
                     type="email"
+                    required
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    value={email}
                     placeholder="Matricule"
                     _placeholder={{ color: "black", fontWeight: "black" }}
                   />
                   <Input
                     mt={5}
+                    required
                     border={"2px solid black"}
                     type="password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    value={password}
                     placeholder="Mot de passe"
                     _placeholder={{ color: "black", fontWeight: "black" }}
                   />
@@ -229,8 +310,6 @@ function Login() {
                         color: "white",
                         textDecor: "none",
                       }}
-                      as={Link}
-                      href="/Dashboard"
                     >
                       Connexion
                     </Button>
