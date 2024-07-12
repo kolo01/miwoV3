@@ -1,6 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Warning from "@/components/Warning";
 import {
   Box,
   Button,
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <Box className="w-screen h-screen ">
+      <Warning />
       <Navbar />
       <Box mt={{ base: 10, lg: 20 }}>
         <Center>

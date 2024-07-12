@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 function Dashboard() {
   const router = useRouter();
   const [role, setRole] = useState("");
+
   useEffect(() => {
     onAuthStateChanged(authentic, async (user) => {
       if (user) {

@@ -10,12 +10,18 @@ export function Account() {
   return (
     <Box
       boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
-      width={"50px"}
+      width={{ base: "100px", lg: "fit-content" }}
     >
-      {ensAvatar && <Image alt="ENS Avatar" src={ensAvatar} />}
-      {address && <div>{ensName ? `${ensName} (${address})` : address}</div>}
+      <Box display={{ base: "none", lg: "block" }}>
+        {ensAvatar && <Image alt="ENS Avatar" src={ensAvatar} />}
+        {address && <div>{ensName ? `${ensName} (${address})` : address}</div>}
+      </Box>
 
-      <Button colorScheme={"red"} onClick={() => disconnect()}>
+      <Button
+        colorScheme={"red"}
+        width={"fit-content"}
+        onClick={() => disconnect()}
+      >
         Disconnect
       </Button>
     </Box>

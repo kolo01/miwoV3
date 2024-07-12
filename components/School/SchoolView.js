@@ -18,7 +18,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Account } from "../Account";
 import { WalletOptions } from "../walletoptions";
 import { useAccount } from "wagmi";
@@ -29,15 +29,21 @@ import { FaHome } from "react-icons/fa";
 import { PiUsersFourDuotone } from "react-icons/pi";
 import { FaUserGraduate } from "react-icons/fa";
 import { FaSackDollar } from "react-icons/fa6";
+import Dashboard from "./Dashboard";
+import Apprenants from "./Apprenants";
+import BuyPack from "./BuyPack";
+import Diplomes from "./Diplomes";
+import Profils from "../Profils";
 
 function ConnectWallet() {
   const { isConnected } = useAccount();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   if (isConnected) return <Account />;
 
   return (
     <>
-      <Button colorScheme={"green"} p={10} onClick={onOpen}>
+      <Button colorScheme={"green"} onClick={onOpen}>
         Connexion
       </Button>
 
@@ -59,10 +65,14 @@ function ConnectWallet() {
 
 function SchoolView() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [view, setView] = useState();
+  const [view, setView] = useState("Accueil");
+  const [name, setName] = useState("");
+  useEffect(() => {
+    setName(sessionStorage.getItem("nom"));
+  }, [name]);
 
   return (
-    <Flex>
+    <Flex overflowX={"auto"}>
       <Box
         display={{ base: "none", lg: "block" }}
         className="h-screen "
@@ -73,7 +83,7 @@ function SchoolView() {
           <Avatar />
         </Center>
         <Center>
-          <Heading>Nom du groupe</Heading>
+          <Heading>{name}</Heading>
         </Center>
         <SimpleGrid
           columns={1}
@@ -82,13 +92,74 @@ function SchoolView() {
           fontSize={"25px"}
           spacing={10}
         >
-          <Text onClick={() => setView("Accueil")}> Accueil</Text>
-          <Text onClick={() => setView("Apprenants")}> Nos Apprenants</Text>
-          <Text onClick={() => setView("Diplomes")}> Nos diplômes </Text>
-          <Text onClick={() => setView("Profils")}> Profils</Text>
+          <Text
+            cursor={"pointer"}
+            _hover={{
+              bgColor: "#edbd81",
+              border: "2px solid black",
+              width: "fit-content",
+              padding: "10px",
+            }}
+            onClick={() => setView("Accueil")}
+          >
+            {" "}
+            Accueil
+          </Text>
+          <Text
+            cursor={"pointer"}
+            _hover={{
+              bgColor: "#edbd81",
+              border: "2px solid black",
+              width: "fit-content",
+              padding: "10px",
+            }}
+            onClick={() => setView("Apprenants")}
+          >
+            {" "}
+            Nos Apprenants
+          </Text>
+          <Text
+            cursor={"pointer"}
+            _hover={{
+              bgColor: "#edbd81",
+              border: "2px solid black",
+              width: "fit-content",
+              padding: "10px",
+            }}
+            onClick={() => setView("Paiement")}
+          >
+            {" "}
+            Paiement
+          </Text>
+          <Text
+            cursor={"pointer"}
+            _hover={{
+              bgColor: "#edbd81",
+              border: "2px solid black",
+              width: "fit-content",
+              padding: "10px",
+            }}
+            onClick={() => setView("Diplomes")}
+          >
+            {" "}
+            Nos diplômes{" "}
+          </Text>
+          <Text
+            cursor={"pointer"}
+            _hover={{
+              bgColor: "#edbd81",
+              border: "2px solid black",
+              width: "fit-content",
+              padding: "10px",
+            }}
+            onClick={() => setView("Profils")}
+          >
+            {" "}
+            Profils
+          </Text>
           {/* <Text> View</Text> */}
         </SimpleGrid>
-        <Flex mt={"20vh"}>
+        <Flex mt={"10vh"}>
           <ConnectWallet />
           {/* <Button onClick={onOpen}>Open Modal</Button>
 
@@ -111,16 +182,15 @@ function SchoolView() {
       </Box>
       <Box
         display={{ base: "block", lg: "none" }}
-        className="h-screen "
+        className="min-h-screen "
         bgColor={"#f2eae0"}
-        p={20}
+        py={20}
+        px={5}
       >
         <Center>
-          <Avatar />
+          <Avatar name={name} />
         </Center>
-        <Center>
-          <Heading>Nom du groupe</Heading>
-        </Center>
+
         <SimpleGrid
           columns={1}
           mt={40}
@@ -154,80 +224,13 @@ function SchoolView() {
           <ConnectWallet />
         </Flex>
       </Box>
-      <Box className="h-screen " bgColor={"white"}>
-        {/* <Center>
-          <Heading>Rechercher un etudiant</Heading>
-        </Center> */}
-        <Box ml={20} mt={10}>
-          <GetStudent />
-        </Box>
-        <SimpleGrid columns={3} spacing={10} mt={20}>
-          <Box
-            textAlign={"center"}
-            height={"fit-content"}
-            p={10}
-            width={"fit-content"}
-            boxShadow={" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
-          >
-            <Text fontSize={"25px"} fontWeight={600}>
-              Nombre d{"'"}apprenants
-            </Text>
-            <Text>150</Text>
-          </Box>
-          <Box
-            textAlign={"center"}
-            height={"fit-content"}
-            p={10}
-            width={"fit-content"}
-            boxShadow={" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
-          >
-            <Text fontSize={"25px"} fontWeight={600}>
-              Diplômes enregistrés
-            </Text>
-            <Text>100</Text>
-          </Box>
-          <Box
-            textAlign={"center"}
-            height={"fit-content"}
-            p={10}
-            width={"fit-content"}
-            boxShadow={" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
-          >
-            <Text fontSize={"25px"} fontWeight={600}>
-              Apprenants Enregistrés
-            </Text>
-            <Text>100</Text>
-          </Box>
-          <Box
-            textAlign={"center"}
-            height={"fit-content"}
-            p={10}
-            width={"fit-content"}
-            boxShadow={" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
-          >
-            <Text fontSize={"25px"} fontWeight={600}>
-              Nombres d{"'"}enregistrement possible
-            </Text>
-            <Text>100</Text>
-          </Box>
-          <Box
-            textAlign={"center"}
-            height={"fit-content"}
-            p={10}
-            width={"fit-content"}
-            boxShadow={" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"}
-          >
-            <Text fontSize={"25px"} fontWeight={600}>
-              Nombres d{"'"}enregistrement restant
-            </Text>
-            <Text>50</Text>
-          </Box>
-        </SimpleGrid>
-        <Flex mt={10} justifyContent={"space-evenly"}>
-          <SaveStudent />
-          <SaveDiploma />
-        </Flex>
-      </Box>
+
+      {view == "Accueil" ? <Dashboard /> : <></>}
+      {view === "Apprenants" && <Apprenants />}
+      {view === "Paiement" && <BuyPack />}
+      {view === "Diplomes" && <Diplomes />}
+      {view === "Profils" && <Profils />}
+      {/* {view === "View" && <Text>View</Text>} */}
     </Flex>
   );
 }

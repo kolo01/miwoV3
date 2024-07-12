@@ -15,9 +15,11 @@ import {
 import axios from "axios";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 function Login() {
+  const router = useRouter();
   const toast = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -75,6 +77,7 @@ function Login() {
           sessionStorage.setItem("nom", docInfo.data().nom);
           sessionStorage.setItem("email", docInfo.data().email);
         }
+        router.push("/Dashboard");
       })
       .catch((err) => {
         if (err.message == "Firebase: Error (auth/invalid-credential).") {
